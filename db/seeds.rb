@@ -11,7 +11,7 @@
   usern = username.split.join
   user = User.new ({
     name: Faker::Name.name,
-    uname: usern,
+    username: usern,
   })
   user.password = "password"
   user.save!
@@ -23,7 +23,7 @@ end
   hacker_word = tweet_message.split.sample
   tweet = Tweet.create ({
     title: Faker::App.name,
-    message: tweet_message,
+    body: tweet_message,
     user_id: Faker::Number.between(1, 100)
   })
 end
@@ -41,6 +41,7 @@ end
   doge = 3.times.map { doge_start.sample.capitalize + " " + doge_end.sample + doge_exclaim.sample + "\n" }.join("")
   Comment.create ({
     body: doge,
-    tweet_id: Faker::Number.between(1, 300)
+    tweet_id: Faker::Number.between(1, 300),
+    user_id:
   })
 end
