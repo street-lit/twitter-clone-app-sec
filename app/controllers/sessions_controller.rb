@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   def new # login page
   end
 
-  def create #create the login session
+  def create # create the login session
     #username and password
     user = User.find_by_username(params[:username])
     if user.present? && user.authenticate(params[:password])
@@ -16,13 +16,14 @@ class SessionsController < ApplicationController
     end
   end
 
-  def destroy
-    @session.destroy
-    respond_to do |format|
-      format.html { redirect_to sessions_url, notice: 'Session was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+  def destroy # delete the login sessoin
+    session[:logged_in_users_id] = nil
+    redirect_to root_path, notice: "Succesfully logged out."
   end
 
   private
+
+  def set_user_session(user)
+    session[:logged_in_users_id] = user.id
+  end
 end

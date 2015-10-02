@@ -8,7 +8,14 @@
 </head>
 <body>
 
+<%= notice %>
+<%= alert %>
+
 <%= yield %>
 
+<%= link_to("LOGOUT", logout_path, method: :DELETE ) if user_logged_in? %>
+<footer>
+  <%= params.inspect if Rails.env.development? %>
+</footer>
 </body>
 </html>
