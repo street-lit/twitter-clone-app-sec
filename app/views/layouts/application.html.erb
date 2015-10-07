@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>TwitterCloneSecure</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>TwitterCloneSecure</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div class="container">
+      <%= render 'shared/header' %>
+      <%= alert %>
+      <% if @current_user %>
+        <p>Hello <%= @current_user.name %></p>
+      <% end %>
+      <%= yield %>
 
-<%= alert %>
-
-<%= yield %>
-
-<%= link_to("LOGOUT", logout_path, method: :DELETE ) if user_logged_in? %>
-<footer>
-  <%= params.inspect if Rails.env.development? %>
-</footer>
-</body>
+      <% if !user_logged_in? %>
+      <%= link_to("Login", login_path) %>
+      <% else %>
+      <%= link_to("LOGOUT", logout_path, method: :DELETE ) if user_logged_in? %>
+      <% end %>
+      <footer>
+        <%= params.inspect if Rails.env.development? %>
+        <%= @current_user.inspect %>
+      </footer>
+    </div>
+  </body>
 </html>

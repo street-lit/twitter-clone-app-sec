@@ -1,19 +1,28 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @user.name %>
+  <strong>Name:</strong> <%= @user.name %> <strong>Username:</strong> <%= @user.username %>
 </p>
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
-
-<p>
-  <strong>Password digest:</strong>
-  <%= @user.password_digest %>
-</p>
+<p><strong><%= @user.name %>'s Tweets:</strong></p>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Body</th>
+      <th colspan="3">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user.tweets.each do |tweet| %>
+      <tr>
+        <td><%= tweet.title %></td>
+        <td><%= tweet.body %></td>
+        <td><%= tweet.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'Back', users_path %> |

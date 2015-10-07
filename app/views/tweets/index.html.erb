@@ -2,13 +2,13 @@
 
 <h1>Listing Tweets</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Title</th>
       <th>Body</th>
-      <th>User</th>
-      <th colspan="3"></th>
+      <th>Tweeted By</th>
+      <th colspan="3">Actions</th>
     </tr>
   </thead>
 
@@ -17,10 +17,10 @@
       <tr>
         <td><%= tweet.title %></td>
         <td><%= tweet.body %></td>
-        <td><%= tweet.user %></td>
+        <td><%= link_to( "#{tweet.user.name}", user_path(tweet.user)) %></td>
         <td><%= link_to 'Show', tweet %></td>
-        <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
-        <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_tweet_path(tweet) if tweet.user == @current_user %></td>
+        <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } if tweet.user == @current_user %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Tweet', new_tweet_path %>
+<%= link_to 'New Tweet', new_tweet_path if user_logged_in? %>

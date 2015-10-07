@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   skip_before_filter :authenticate_user, only: [:show, :new, :create]
-  # before_action :authenticate_user
+  before_action :current_user
 
 
   def authenticate_user
@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 
   def current_user
     if user_logged_in?
-      User.find(session[:logged_in_users_id])
+      @current_user ||= User.find(session[:logged_in_users_id])
     end
   end
 

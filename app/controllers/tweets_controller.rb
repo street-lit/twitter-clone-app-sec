@@ -19,7 +19,9 @@ class TweetsController < ApplicationController
 
   # GET /tweets/1/edit
   def edit
-
+    unless current_user.id == @tweet.user_id
+      redirect_to :back, alert: "You are not authorized to edit this link"
+    end
   end
 
   # POST /tweets
@@ -55,10 +57,14 @@ class TweetsController < ApplicationController
   # DELETE /tweets/1
   # DELETE /tweets/1.json
   def destroy
-    @tweet.destroy
-    respond_to do |format|
-      format.html { redirect_to tweets_url, notice: 'Tweet was successfully destroyed.' }
-      format.json { head :no_content }
+    if @tweet.user_id != current_user.id
+      redirect_to :back, alert: "You are not AUTHORIZED to delete this tweet."
+    else
+      @tweet.destroy
+      respond_to do |format|
+        format.html { redirect_to tweets_url, notice: 'Tweet was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 
