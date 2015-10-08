@@ -24,7 +24,7 @@
       <% end %>
       <footer>
         <%= params.inspect if Rails.env.development? %>
-        <%= @current_user.inspect %>
+        <%= @current_user.inspect if Rails.env.development? %>
       </footer>
     </div>
   </body>
