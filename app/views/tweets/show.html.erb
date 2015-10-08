@@ -10,5 +10,5 @@
 </p>
 
 <%= link_to 'New Tweet', new_tweet_path, class: "btn btn-default" if user_logged_in? %>
-<%= link_to 'Edit', edit_tweet_path(@tweet), class: "btn btn-default"  %>
+<%= link_to 'Edit', edit_tweet_path(@tweet), class: "btn btn-default" if @tweet.user == @current_user  %>
 <%= link_to 'Back', tweets_path, class: "btn btn-default"  %>
