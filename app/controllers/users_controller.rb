@@ -62,9 +62,10 @@ class UsersController < ApplicationController
     if current_user != @user
       redirect_to :back, alert: "You are not AUTHORIZED to delete this user."
     else
+      session[:logged_in_users_id] = nil
       @user.destroy
       respond_to do |format|
-        format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+        format.html { redirect_to login_path, notice: 'User was successfully destroyed.' }
         format.json { head :no_content }
       end
     end

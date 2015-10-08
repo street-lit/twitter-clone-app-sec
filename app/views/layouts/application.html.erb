@@ -13,6 +13,8 @@
       <% if @current_user %>
         <p>Hello <%= @current_user.name %></p>
       <% end %>
+
+      <p id="notice"><%= notice %></p>
       <%= yield %>
 
       <% if !user_logged_in? %>
