@@ -14,6 +14,7 @@ class TweetsController < ApplicationController
 
   # GET /tweets/new
   def new
+    authenticate_user
     @tweet = Tweet.new
   end
 
