@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   skip_before_filter :authenticate_user, only: [:show, :new, :create]
   before_action :current_user
 
-
   def authenticate_user
     unless user_logged_in?
       redirect_to new_login_path

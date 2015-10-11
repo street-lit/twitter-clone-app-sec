@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     unless current_user == @user
-      redirect_to :back, alert: "You are not AUTHORIZED to edit this user."
+      redirect_to users_path, alert: "You are not AUTHORIZED to edit this user."
     end
   end
 
